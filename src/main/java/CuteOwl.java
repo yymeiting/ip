@@ -8,7 +8,7 @@ public class CuteOwl {
         String indentation = "    ";
 
         String intro_text = indentation + "____________________________________________________________\n" +
-                indentation + " Hello! I'm CuteOwl :) \n" +
+                indentation + " Hello! I'm CuteOwl :)\n" +
                 indentation + " What can I do for you?\n" +
                 indentation + "____________________________________________________________\n";
         System.out.println(intro_text);
@@ -19,7 +19,7 @@ public class CuteOwl {
             // Exit program if user input = "bye"
             if (input.equalsIgnoreCase("bye")) {
                 String exit_text = indentation + "____________________________________________________________\n" +
-                        indentation + " Bye. Hope to see you again soon! \n" +
+                        indentation + " Bye. Hope to see you again soon!\n" +
                         indentation + "____________________________________________________________\n";
                 System.out.println(exit_text);
                 break;
@@ -27,7 +27,8 @@ public class CuteOwl {
 
             // List task if user input = "list"
             else if (input.equalsIgnoreCase("list")) {
-                String list_tasks = "\n" + indentation + "____________________________________________________________\n";
+                String list_tasks = indentation + "____________________________________________________________\n" +
+                        indentation + " Here are the tasks in your list:\n";
                 for (int  i = 0; i < t_count; i+=1 ) {
                     list_tasks = list_tasks + indentation + " " + (i + 1) + ". " + tasks[i] + "\n";
                 }
@@ -44,7 +45,7 @@ public class CuteOwl {
                     String mark_text = "\n" + indentation + "____________________________________________________________\n" +
                             indentation + " Nice! I've marked this task as done:\n" +
                             indentation + " " + tasks[list_index] + "\n" +
-                            "____________________________________________________________\n";
+                            indentation + "____________________________________________________________\n";
                     System.out.println(mark_text);
                 }
             }
@@ -57,20 +58,45 @@ public class CuteOwl {
                     String unmark_text = "\n" + indentation + "____________________________________________________________\n" +
                             indentation + " OK, I've marked this task as not done yet:\n" +
                             indentation + " " + tasks[list_index] + "\n" +
-                            "____________________________________________________________\n";
+                            indentation + "____________________________________________________________\n";
                     System.out.println(unmark_text);
                 }
             }
 
-            // Otherwise add tasks
-            else {
-                tasks[t_count] = new Task(input);
+            // todo task if user input = "todo"
+            else if (input.startsWith("todo ")) {
+                String description = input.substring(5).trim();
+                tasks[t_count] = new Todo(description);
                 t_count += 1;
+            }
 
-                String echo_text = "\n" + indentation + "____________________________________________________________\n" +
-                        indentation + " added: " + input + "\n" +
+            // deadline task if user input = "deadline"
+            else if (input.startsWith("deadline ")) {
+                String[] parts = input.substring(9).split("/by");
+                String description = parts[0].trim();
+                String by = parts[1].trim();
+                tasks[t_count] = new Deadline(description, by);
+                t_count += 1;
+            }
+
+            // deadline task if user input = "event"
+            else if (input.startsWith("event ")) {
+                String[] parts = input.substring(6).split("/from|/to");
+                String description = parts[0].trim();
+                String from = parts[1].trim();
+                String to = parts[2].trim();
+                tasks[t_count] = new Event(description, from, to);
+                t_count += 1;
+            }
+
+            // Print task after user input
+            if (input.startsWith("event ") || input.startsWith("deadline ") || input.startsWith("todo ")) {
+                String task_text =  indentation + "____________________________________________________________\n" +
+                        indentation + " Got it. I've added this task:\n" +
+                        indentation + "   " + tasks[t_count - 1] + "\n" +
+                        indentation + " Now you have " + t_count + " tasks in the list.\n" +
                         indentation + "____________________________________________________________\n";
-                System.out.println(echo_text);
+                System.out.println(task_text);
             }
         }
         scanner.close();
