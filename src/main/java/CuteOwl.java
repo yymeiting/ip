@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class CuteOwl {
     public static void main(String[] args) {
         String CHAT_INDENTATION = "    ";
@@ -93,7 +96,8 @@ public class CuteOwl {
 
                     String[] parts = input.substring(9).split("/by");
                     String event_desc = parts[0].trim();
-                    String by = parts[1].trim();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    LocalDateTime by = LocalDateTime.parse(parts[1].trim(), formatter);
                     tasks.add(new Deadline(event_desc, by));
                     tasksCounter += 1;
 
@@ -115,8 +119,10 @@ public class CuteOwl {
 
                     String[] parts = input.substring(6).split("/from|/to");
                     String event_desc = parts[0].trim();
-                    String from = parts[1].trim();
-                    String to = parts[2].trim();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    LocalDateTime from = LocalDateTime.parse(parts[1].trim(), formatter);
+                    LocalDateTime to = LocalDateTime.parse(parts[2].trim(), formatter);
+
                     tasks.add(new Event(event_desc, from, to));
                     tasksCounter += 1;
 
