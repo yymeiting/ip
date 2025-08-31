@@ -25,10 +25,10 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList taskList) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()));
-            for (Task task : tasks) {
+            for (Task task : taskList.getAll()) {
                 writer.write(task.toSaveFormat());
                 writer.newLine();
             }
@@ -37,4 +37,5 @@ public class Storage {
             System.out.println("Error saving tasks: " + e.getMessage());
         }
     }
+
 }
