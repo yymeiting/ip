@@ -1,10 +1,14 @@
-import java.util.ArrayList;
+package cuteowl.ui;
+
+import cuteowl.task.Task;
+import cuteowl.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     String CHAT_INDENTATION = "     ";
-    String DRAW_LINE = "    ____________________________________________________________";
-    private Scanner scanner;
+    String DRAW_LINE = "    _______________________________________________________________________";
+    private Scanner scanner = new Scanner(System.in);
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -36,8 +40,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        Scanner input = new Scanner(System.in);
-        return input.nextLine();
+        return scanner.nextLine();
     }
 
     public void showTaskList(TaskList taskList) {

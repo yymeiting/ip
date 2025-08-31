@@ -1,4 +1,7 @@
-import java.awt.desktop.SystemEventListener;
+package cuteowl.parser;
+
+import cuteowl.command.Command;
+import cuteowl.exception.CuteOwlException;
 
 public class Parser {
     static String TAB = "     ";
