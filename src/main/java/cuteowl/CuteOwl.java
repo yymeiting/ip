@@ -1,3 +1,12 @@
+package cuteowl;
+
+import cuteowl.command.Command;
+import cuteowl.exception.CuteOwlException;
+import cuteowl.parser.Parser;
+import cuteowl.storage.Storage;
+import cuteowl.task.TaskList;
+import cuteowl.ui.Ui;
+
 public class CuteOwl {
     private Ui ui;
     private TaskList tasks;

@@ -1,3 +1,8 @@
+package cuteowl.storage;
+
+import cuteowl.task.Task;
+import cuteowl.task.TaskList;
+
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

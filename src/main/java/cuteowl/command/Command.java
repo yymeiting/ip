@@ -1,3 +1,10 @@
+package cuteowl.command;
+
+import cuteowl.storage.Storage;
+import cuteowl.ui.Ui;
+import cuteowl.exception.CuteOwlException;
+import cuteowl.task.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -69,7 +76,7 @@ public class Command {
         return type.equals("bye");
     }
 
-    // Command Handlers
+    // cuteowl.command.Command Handlers
 
     private void handleAddTodo(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Todo(description);
