@@ -28,11 +28,12 @@ test {
 }
 
 application {
-    mainClass.set("seedu.cuteowl.CuteOwl")
+    mainClass.set("cuteowl.CuteOwl")
 }
 
 shadowJar {
-    archiveBaseName = "cuteowl"
+    archiveFileName = 'cuteowl.jar'
+    archiveBaseName = "CuteOwl"
     archiveClassifier = null
 }
 

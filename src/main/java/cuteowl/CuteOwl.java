@@ -7,11 +7,23 @@ import cuteowl.storage.Storage;
 import cuteowl.task.TaskList;
 import cuteowl.ui.Ui;
 
+/**
+ * The main class for CuteOwl chatbot application.
+ * This class initializes core components and handles main execution loop.
+ */
+
 public class CuteOwl {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Constructs a CuteOwl instance with the specified file path for persistent storage.
+     * Initializes UI, storage and loads tasks from file.
+     * If loading fails, ui will show loading error and starts with an empty task list.
+     *
+     * @param filePath Path to the file used for loading and saving tasks.
+     */
     public CuteOwl(String filePath) {
         ui = new Ui();
         storage = new Storage();
@@ -22,6 +34,11 @@ public class CuteOwl {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Starts the main loop of the chatbot.
+     * Continuously reads user commands, parses and execute them until an exit command is received.
+     */
 
     public void run() {
         ui.showWelcome();
@@ -42,6 +59,12 @@ public class CuteOwl {
         }
     }
 
+    /**
+     * Entry point of the application.
+     * Creates a CuteOwl instance and starts the chatbot.
+     *
+     * @param args Command-line arguments (not used)
+     */
     public static void main(String[] args) {
         new CuteOwl("data/tasks.txt").run();
     }
