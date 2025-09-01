@@ -20,9 +20,9 @@ public class Ui {
 
     public void showWelcome() {
         showLine();
-        String intro_text = CHAT_INDENTATION + "Hello! I'm CuteOwl :)\n" +
+        String introText = CHAT_INDENTATION + "Hello! I'm CuteOwl :)\n" +
                 CHAT_INDENTATION + "What can I do for you?";
-        System.out.println(intro_text);
+        System.out.println(introText);
         showLine();
     }
 
@@ -52,10 +52,10 @@ public class Ui {
     }
 
     public void showTaskAdded(Task task, int size) {
-            String taskText =  CHAT_INDENTATION + "Got it. I've added this task:\n" +
+            String taskAdded =  CHAT_INDENTATION + "Got it. I've added this task:\n" +
                     CHAT_INDENTATION + "  " + task + "\n" +
                     CHAT_INDENTATION + "Now you have " + size + " tasks in the list.";
-            System.out.println(taskText);
+            System.out.println(taskAdded);
     }
 
     public void showMarkText(Task task) {
