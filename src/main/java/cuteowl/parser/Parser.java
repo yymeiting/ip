@@ -62,6 +62,13 @@ public class Parser {
 
                 return new Command("unmark", arguments);
 
+            case "find":
+                if (arguments.isEmpty()) {
+                    throw new CuteOwlException(TAB + "OOPS!!! Please enter the a keyword of the task you wish to find.");
+                }
+                return new Command("find", arguments);
+
+
             default:
                 throw new CuteOwlException(TAB + "OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
