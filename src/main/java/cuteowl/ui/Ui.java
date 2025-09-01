@@ -47,8 +47,8 @@ public class Ui {
      * Display the exit message when chatbot ends.
      */
     public void showExit() {
-        String exit_text = CHAT_INDENTATION + "Bye. Hope to see you again soon!";
-        System.out.println(exit_text);
+        String exitText = CHAT_INDENTATION + "Bye. Hope to see you again soon!";
+        System.out.println(exitText);
     }
 
     /**
@@ -96,10 +96,10 @@ public class Ui {
      * @param size The updated number of task in the list.
      */
     public void showTaskAdded(Task task, int size) {
-            String task_text =  CHAT_INDENTATION + "Got it. I've added this task:\n" +
+            String taskText =  CHAT_INDENTATION + "Got it. I've added this task:\n" +
                     CHAT_INDENTATION + "  " + task + "\n" +
                     CHAT_INDENTATION + "Now you have " + size + " tasks in the list.";
-            System.out.println(task_text);
+            System.out.println(taskText);
     }
 
     /**
