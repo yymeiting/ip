@@ -67,6 +67,10 @@ public class Command {
                 handleDelete(tasks, ui, storage);
                 break;
 
+            case "find":
+                handleFind(tasks, ui, storage);
+                break;
+
             default:
                 throw new CuteOwlException("OOPS!!! Unknown command: " + type);
         }
@@ -197,6 +201,16 @@ public class Command {
         Task removed = tasks.delete(index - 1);
         storage.save(tasks);
         ui.showTaskDeleted(removed, tasks.size());
+    }
+
+    private void handleFind(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : tasks.getAll()) {
+            if (task.getDescription().contains(description)) {
+                matchingTasks.add(task);
+            }
+        }
+        ui.showTaskList(matchingTasks);
     }
 
 }
