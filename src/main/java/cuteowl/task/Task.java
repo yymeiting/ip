@@ -21,11 +21,19 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
     public String toSaveFormat() {
+         return "";
+    }
+
+    public String getDescription() {
         return description;
     }
 
