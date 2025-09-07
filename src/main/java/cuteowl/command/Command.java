@@ -33,45 +33,39 @@ public class Command {
         this.description = null;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         switch (type) {
             case "bye":
                 ui.showExit();
-                break;
+                return ui.exitMessage();
 
             case "list":
                 ui.showTaskList(tasks);
-                break;
+                return ui.showTaskListGUI(tasks);
 
             case "todo":
-                handleAddTodo(tasks, ui, storage);
-                break;
+                return handleAddTodo(tasks, ui, storage);
 
             case "deadline":
-                handleAddDeadline(tasks, ui, storage);
-                break;
+                return handleAddDeadline(tasks, ui, storage);
 
             case "event":
-                handleAddEvent(tasks, ui, storage);
-                break;
+                return handleAddEvent(tasks, ui, storage);
 
             case "mark":
-                handleMark(tasks, ui, storage);
-                break;
+                return handleMark(tasks, ui, storage);
 
             case "unmark":
-                handleUnmark(tasks, ui, storage);
-                break;
+                return handleUnmark(tasks, ui, storage);
 
             case "delete":
-                handleDelete(tasks, ui, storage);
-                break;
+                return handleDelete(tasks, ui, storage);
 
             case "find":
-                handleFind(tasks, ui, storage);
-                break;
+                return handleFind(tasks, ui, storage);
 
             default:
+                System.out.println(TAB + "OOPS!!! Unknown command: " + type);
                 throw new CuteOwlException("OOPS!!! Unknown command: " + type);
         }
     }
@@ -82,16 +76,19 @@ public class Command {
 
     // cuteowl.command.Command Handlers
 
-    private void handleAddTodo(TaskList tasks, Ui ui, Storage storage) {
+    private String handleAddTodo(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Todo(description);
         tasks.add(task);
         storage.save(tasks);
         ui.showTaskAdded(task, tasks.size());
+        return ui.showTaskAddedGUI(task, tasks.size());
     }
 
-    private void handleAddDeadline(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    private String handleAddDeadline(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         if (args.length < 2) {
-            throw new CuteOwlException(TAB + "OOPS!!! Please enter your deadline in the format:\n" +
+            System.out.println(TAB + "OOPS!!! Please enter your deadline in the format:\n" +
+                    TAB + "deadline <description> /by <date>");
+            throw new CuteOwlException("OOPS!!! Please enter your deadline in the format:\n" +
                     TAB + "deadline <description> /by <date>");
         }
         String description = args[0].trim();
@@ -115,20 +112,25 @@ public class Command {
         }
 
         if (!parsed) {
-            throw new CuteOwlException(TAB + "OOPS!!! The date/time format is invalid.\n" +
+            System.out.println(TAB + "OOPS!!! The date/time format is invalid.\n" +
                     TAB + "Please use: d/M/yyyy HHmm (e.g., 2/9/2025 1800)");
+            throw new CuteOwlException("OOPS!!! The date/time format is invalid.\n" +
+                    "Please use: d/M/yyyy HHmm (e.g., 2/9/2025 1800)");
         }
 
         Task task = new Deadline(description, by);
         tasks.add(task);
         storage.save(tasks);
         ui.showTaskAdded(task, tasks.size());
+        return ui.showTaskAddedGUI(task, tasks.size());
     }
 
-    private void handleAddEvent(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    private String handleAddEvent(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         if (args.length < 3) {
-            throw new CuteOwlException(TAB + "OOPS!!! Please enter your event in the format:\n" +
+            System.out.println(TAB + "OOPS!!! Please enter your event in the format:\n" +
                     TAB + "event <description> /from <start> /to <end>");
+            throw new CuteOwlException("OOPS!!! Please enter your event in the format:\n" +
+                    "event <description> /from <start> /to <end>");
         }
 
         String description = args[0].trim();
@@ -155,6 +157,8 @@ public class Command {
         }
 
         if (!parsed) {
+            System.out.println("OOPS!!! The date/time format is invalid.\n" +
+                    "Please use: d/M/yyyy HHmm (e.g., 2/9/2025 1800)");
             throw new CuteOwlException(TAB + "OOPS!!! The date/time format is invalid.\n" +
                     TAB + "Please use: d/M/yyyy HHmm (e.g., 2/9/2025 1800)");
         }
@@ -163,25 +167,29 @@ public class Command {
         tasks.add(task);
         storage.save(tasks);
         ui.showTaskAdded(task, tasks.size());
+        return ui.showTaskAddedGUI(task, tasks.size());
     }
 
-    private void handleMark(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    private String handleMark(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         int index = Integer.parseInt(description);
 
         if (index > tasks.size()) {
-            throw new CuteOwlException(TAB + "Please input a valid index.");
+            System.out.println(TAB + "Please input a valid index.");
+            throw new CuteOwlException("Please input a valid index.");
         }
 
         Task task = tasks.get(index - 1);
         task.mark();
         storage.save(tasks);
         ui.showMarkText(task);
+        return ui.showMarkTextGUI(task);
     }
 
-    private void handleUnmark(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    private String handleUnmark(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         int index = Integer.parseInt(description);
 
         if (index > tasks.size()) {
+            System.out.println("Please input a valid index.");
             throw new CuteOwlException(TAB + "Please input a valid index.");
         }
 
@@ -189,21 +197,24 @@ public class Command {
         task.unmark();
         storage.save(tasks);
         ui.showUnmarkText(task);
+        return ui.showUnmarkTextGUI(task);
     }
 
-    private void handleDelete(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    private String handleDelete(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         int index = Integer.parseInt(description);
 
         if (index > tasks.size()) {
-            throw new CuteOwlException(TAB + "Please input a valid index.");
+            System.out.println(TAB + "Please input a valid index.");
+            throw new CuteOwlException("Please input a valid index.");
         }
 
         Task removed = tasks.delete(index - 1);
         storage.save(tasks);
         ui.showTaskDeleted(removed, tasks.size());
+        return ui.showTaskDeletedGUI(removed, tasks.size());
     }
 
-    private void handleFind(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    private String handleFind(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks.getAll()) {
             if (task.getDescription().contains(description)) {
@@ -211,6 +222,7 @@ public class Command {
             }
         }
         ui.showTaskList(matchingTasks);
+        return ui.showTaskListGUI(matchingTasks);
     }
 
 }
