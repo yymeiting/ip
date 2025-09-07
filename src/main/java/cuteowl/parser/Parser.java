@@ -20,14 +20,16 @@ public class Parser {
 
             case "todo":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(TAB + "OOPS!!! The description of a todo cannot be empty.");
+                    throw new CuteOwlException("OOPS!!! The description of a todo cannot be empty.");
                 }
 
                 return new Command("todo", arguments);
 
             case "deadline":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! The description of deadline cannot be empty.");
+                    System.out.println(TAB + "OOPS!!! The description of deadline cannot be empty.");
+                    throw new CuteOwlException("OOPS!!! The description of deadline cannot be empty.");
                 }
 
                 String[] args = arguments.split("/by");
@@ -35,7 +37,8 @@ public class Parser {
 
             case "event":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! The description of a event cannot be empty.");
+                    System.out.println(TAB + "OOPS!!! The description of a event cannot be empty.");
+                    throw new CuteOwlException("OOPS!!! The description of a event cannot be empty.");
                 }
 
                 String[] eventArgs = arguments.split("/from|/to");
@@ -43,42 +46,40 @@ public class Parser {
 
             case "delete":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! Please enter the index of the task you wish to delete.");
+                    System.out.println(TAB + "OOPS!!! Please enter the index of the task you wish to delete.");
+                    throw new CuteOwlException("OOPS!!! Please enter the index of the task you wish to delete.");
                 }
 
                 return new Command("delete", arguments);
 
             case "mark":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! Please enter the index of the task you wish to mark.");
+                    System.out.println(TAB + "OOPS!!! Please enter the index of the task you wish to mark.");
+                    throw new CuteOwlException("OOPS!!! Please enter the index of the task you wish to mark.");
                 }
 
                 return new Command("mark", arguments);
 
             case "unmark":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! Please enter the index of the task you wish to unmark.");
+                    System.out.println(TAB + "OOPS!!! Please enter the index of the task you wish to unmark.");
+                    throw new CuteOwlException("OOPS!!! Please enter the index of the task you wish to unmark.");
                 }
 
                 return new Command("unmark", arguments);
 
             case "find":
                 if (arguments.isEmpty()) {
-                    throw new CuteOwlException(TAB + "OOPS!!! Please enter the a keyword of the task you wish to find.");
+                    System.out.println(TAB + "OOPS!!! Please enter the a keyword of the task you wish to find.");
+                    throw new CuteOwlException("OOPS!!! Please enter the a keyword of the task you wish to find.");
                 }
                 return new Command("find", arguments);
 
 
             default:
-                throw new CuteOwlException(TAB + "OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println(TAB + "OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new CuteOwlException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private static int parseIndex(String arg) throws CuteOwlException {
-        try {
-            return Integer.parseInt(arg) - 1;
-        } catch (NumberFormatException e) {
-            throw new CuteOwlException("OOPS!!! Please provide a valid task number.");
-        }
-    }
 }

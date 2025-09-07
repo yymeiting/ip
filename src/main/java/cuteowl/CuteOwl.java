@@ -68,4 +68,15 @@ public class CuteOwl {
     public static void main(String[] args) {
         new CuteOwl("data/tasks.txt").run();
     }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (CuteOwlException e) {
+            return ui.showError(e.getMessage()); // You might need to add this method
+        }
+    }
+
+
 }

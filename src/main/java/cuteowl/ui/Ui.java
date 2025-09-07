@@ -51,6 +51,10 @@ public class Ui {
         System.out.println(exitText);
     }
 
+    public String exitMessage() {
+        return "Bye. Hope to see you again soon!";
+    }
+
     /**
      * Display error message when loading from file fails.
      */
@@ -63,8 +67,9 @@ public class Ui {
      *
      * @param message The error message to display.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        //System.out.println(message);
+        return message;
     }
 
     /**
@@ -89,6 +94,14 @@ public class Ui {
         System.out.print(listTasks);
     }
 
+    public String showTaskListGUI(TaskList taskList) {
+        String listTasks = "Here are the tasks in your list:\n";
+        for (int  i = 0; i < taskList.size() ; i+=1 ) {
+            listTasks = listTasks + " " + (i + 1) + ". " + taskList.get(i) + "\n";
+        }
+        return listTasks;
+    }
+
     /**
      * Displays a confirmation message when a task is added.
      *
@@ -102,6 +115,12 @@ public class Ui {
             System.out.println(taskAdded);
     }
 
+    public String showTaskAddedGUI(Task task, int size) {
+        return "Got it. I've added this task:\n" +
+                "  " + task + "\n" +
+                "Now you have " + size + " tasks in the list.";
+    }
+
     /**
      * Display a message when task is marked as done.
      *
@@ -111,6 +130,10 @@ public class Ui {
         String markText = CHAT_INDENTATION + "Nice! I've marked this task as done:\n" +
                 CHAT_INDENTATION + task;
         System.out.println(markText);
+    }
+
+    public String showMarkTextGUI(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -124,6 +147,10 @@ public class Ui {
         System.out.println(unmarkText);
     }
 
+    public String showUnmarkTextGUI(Task task) {
+        return "OK, I've marked this task as not done yet:\n" + task;
+    }
+
     /**
      * Display a confirmation message when task is deleted.
      *
@@ -135,6 +162,12 @@ public class Ui {
                 CHAT_INDENTATION + "  " + task + "\n" +
                 CHAT_INDENTATION + "Now you have " + size + " tasks in the list.";
         System.out.println(taskRemoved);
+    }
+
+    public String showTaskDeletedGUI(Task task, int size) {
+        return "Noted. I've removed this task:\n" +
+                "  " + task + "\n" +
+                "Now you have " + size + " tasks in the list.";
     }
 
 }
