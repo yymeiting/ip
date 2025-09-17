@@ -1,5 +1,6 @@
 package cuteowl.command;
 
+import cuteowl.note.NoteList;
 import cuteowl.exception.CuteOwlException;
 import cuteowl.storage.Storage;
 import cuteowl.task.Task;
@@ -14,17 +15,15 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, NoteList notes) throws CuteOwlException {
         if (index > tasks.size()) {
             throw new CuteOwlException("Please input a valid index.");
         }
 
         Task task = tasks.get(index - 1);
         task.mark();
-
         assert task.getIsDone() : "Task should be marked done after calling mark()";
-
-        storage.save(tasks);
+        storage.save(tasks, notes);
         ui.showMarkText(task);
         return ui.showMarkTextGUI(task);
     }

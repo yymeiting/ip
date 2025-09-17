@@ -1,5 +1,7 @@
 package cuteowl.ui;
 
+import cuteowl.note.Note;
+import cuteowl.note.NoteList;
 import cuteowl.task.Task;
 import cuteowl.task.TaskList;
 
@@ -84,22 +86,53 @@ public class Ui {
     /**
      * Displays the current list of tasks.
      *
-     * @param taskList The TaskList containing all tasks.
+     * @param tasks The TaskList containing all tasks.
      */
-    public void showTaskList(TaskList taskList) {
+    public void showTaskList(TaskList tasks) {
         String listTasks = CHAT_INDENTATION + "Here are the tasks in your list:\n";
-        for (int  i = 0; i < taskList.size() ; i+=1 ) {
-            listTasks = listTasks + CHAT_INDENTATION + " " + (i + 1) + ". " + taskList.get(i) + "\n";
+        for (int  i = 0; i < tasks.size() ; i+=1 ) {
+            listTasks = listTasks + CHAT_INDENTATION + " " + (i + 1) + ". " + tasks.get(i) + "\n";
         }
         System.out.print(listTasks);
     }
 
-    public String showTaskListGUI(TaskList taskList) {
+    public String showTaskListGUI(TaskList tasks) {
         String listTasks = "Here are the tasks in your list:\n";
-        for (int  i = 0; i < taskList.size() ; i+=1 ) {
-            listTasks = listTasks + " " + (i + 1) + ". " + taskList.get(i) + "\n";
+        for (int  i = 0; i < tasks.size() ; i+=1 ) {
+            listTasks = listTasks + " " + (i + 1) + ". " + tasks.get(i) + "\n";
         }
         return listTasks;
+    }
+
+    /**
+     * Displays the current list of notes.
+     *
+     * @param notes The NoteList containing all notes.
+     */
+    public void showNotesList(NoteList notes) {
+        String listNotes;
+        if (notes.isEmpty()) {
+            listNotes = CHAT_INDENTATION + "Sadly there are no notes now!!\n";
+        } else {
+            listNotes = CHAT_INDENTATION + "Here are your notes~ \n";
+            for (int i = 0; i < notes.size(); i += 1) {
+                listNotes = listNotes + CHAT_INDENTATION + "-- " + notes.get(i) + "\n";
+            }
+        }
+        System.out.print(listNotes);
+    }
+
+    public String showNoteListGUI(NoteList notes) {
+        String listNotes;
+        if (notes.isEmpty()) {
+            listNotes = "Sadly there are no notes now!!\n";
+        } else {
+            listNotes = "Here are your notes~ \n";
+            for (int i = 0; i < notes.size(); i += 1) {
+                listNotes = listNotes + "-- " + notes.get(i) + "\n";
+            }
+        }
+        return listNotes;
     }
 
     /**
@@ -119,6 +152,20 @@ public class Ui {
         return "Got it. I've added this task:\n" +
                 "  " + task + "\n" +
                 "Now you have " + size + " tasks in the list.";
+    }
+
+    /**
+     * Displays a confirmation message when a note is added.
+     *
+     * @param note The note that was added.
+     */
+    public void showNoteAdded(Note note) {
+        String noteAdded = CHAT_INDENTATION + "You've noted down " + note;
+        System.out.println(noteAdded);
+    }
+
+    public String showNoteAddedGUI(Note note) {
+        return "You've noted down " + note;
     }
 
     /**

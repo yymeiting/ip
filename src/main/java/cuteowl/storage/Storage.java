@@ -1,5 +1,7 @@
 package cuteowl.storage;
 
+import cuteowl.note.Note;
+import cuteowl.note.NoteList;
 import cuteowl.task.Task;
 import cuteowl.task.TaskList;
 
@@ -44,14 +46,23 @@ public class Storage {
      * Saves the current list of tasks to the save file.
      *
      * @param taskList The TaskList containing all tasks to be saved.
+     * @param noteList The NoteList containing all notes to be saved.
      */
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList, NoteList noteList) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()));
+            writer.write("-----TASKS-----\n");
             for (Task task : taskList.getAll()) {
                 writer.write(task.toSaveFormat());
                 writer.newLine();
             }
+
+            writer.write("\n-----NOTES-----\n");
+            for (Note note : noteList.getAll()) {
+                writer.write(note.toSaveFormat());
+                writer.newLine();
+            }
+
             writer.close();
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());

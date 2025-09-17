@@ -1,5 +1,6 @@
 package cuteowl.command;
 
+import cuteowl.note.NoteList;
 import cuteowl.storage.Storage;
 import cuteowl.task.Event;
 import cuteowl.task.Task;
@@ -24,15 +25,13 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, NoteList notes) {
         int initialSize = tasks.size();
 
         Task task = new Event(description, from, to);
         tasks.add(task);
-
+        storage.save(tasks, notes);
         assert tasks.size() == initialSize + 1 : "task.size() should increase by 1";
-
-        storage.save(tasks);
         ui.showTaskAdded(task, tasks.size());
         return ui.showTaskAddedGUI(task, tasks.size());
     }

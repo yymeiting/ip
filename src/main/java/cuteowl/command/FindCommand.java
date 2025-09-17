@@ -1,5 +1,6 @@
 package cuteowl.command;
 
+import cuteowl.note.NoteList;
 import cuteowl.storage.Storage;
 import cuteowl.task.Task;
 import cuteowl.task.TaskList;
@@ -14,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, NoteList notes) {
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks.getAll()) {
             if (task.getDescription().contains(description)) {
