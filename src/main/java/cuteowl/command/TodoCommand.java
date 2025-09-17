@@ -15,8 +15,10 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int initialSize = tasks.size();
         Task task = new Todo(description);
         tasks.add(task);
+        assert tasks.size() == initialSize + 1 : "tasks.size() should increase by 1";
         storage.save(tasks);
         ui.showTaskAdded(task, tasks.size());
         return ui.showTaskAddedGUI(task, tasks.size());

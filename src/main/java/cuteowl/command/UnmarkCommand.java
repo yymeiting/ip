@@ -21,6 +21,9 @@ public class UnmarkCommand extends Command {
 
         Task task = tasks.get(index - 1);
         task.unmark();
+
+        assert task.getIsDone(): "Task should be unmarked after calling unmark()";
+
         storage.save(tasks);
         ui.showUnmarkText(task);
         return ui.showUnmarkTextGUI(task);
