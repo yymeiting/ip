@@ -15,11 +15,15 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+        int initialSize = tasks.size();
+
         if (index > tasks.size()) {
             System.out.println("     Please input a valid index.");
             throw new CuteOwlException("Please input a valid index.");
         }
         Task removed = tasks.delete(index - 1);
+
+        assert tasks.size() == initialSize - 1 : "task.size() should decrease by 1";
         storage.save(tasks);
         ui.showTaskDeleted(removed, tasks.size());
         return ui.showTaskDeletedGUI(removed, tasks.size());

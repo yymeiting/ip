@@ -21,6 +21,9 @@ public class MarkCommand extends Command {
 
         Task task = tasks.get(index - 1);
         task.mark();
+
+        assert task.getIsDone() : "Task should be marked done after calling mark()";
+
         storage.save(tasks);
         ui.showMarkText(task);
         return ui.showMarkTextGUI(task);

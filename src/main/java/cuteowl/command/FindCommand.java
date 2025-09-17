@@ -9,6 +9,7 @@ public class FindCommand extends Command {
     public final String description;
 
     public FindCommand(String description) {
+        assert !description.trim().isEmpty() : "Search description must not be empty";
         this.description = description;
     }
 
