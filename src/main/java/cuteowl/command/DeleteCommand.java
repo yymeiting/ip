@@ -1,5 +1,6 @@
 package cuteowl.command;
 
+import cuteowl.note.NoteList;
 import cuteowl.exception.CuteOwlException;
 import cuteowl.storage.Storage;
 import cuteowl.task.Task;
@@ -14,13 +15,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws CuteOwlException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, NoteList notes) throws CuteOwlException {
         if (index > tasks.size()) {
             System.out.println("     Please input a valid index.");
             throw new CuteOwlException("Please input a valid index.");
         }
         Task removed = tasks.delete(index - 1);
-        storage.save(tasks);
+        storage.save(tasks, notes);
         ui.showTaskDeleted(removed, tasks.size());
         return ui.showTaskDeletedGUI(removed, tasks.size());
     }

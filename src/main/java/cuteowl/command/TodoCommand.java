@@ -1,5 +1,6 @@
 package cuteowl.command;
 
+import cuteowl.note.NoteList;
 import cuteowl.storage.Storage;
 import cuteowl.task.Task;
 import cuteowl.task.TaskList;
@@ -14,10 +15,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, NoteList notes) {
         Task task = new Todo(description);
         tasks.add(task);
-        storage.save(tasks);
+        storage.save(tasks, notes);
         ui.showTaskAdded(task, tasks.size());
         return ui.showTaskAddedGUI(task, tasks.size());
     }

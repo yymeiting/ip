@@ -2,6 +2,7 @@ package cuteowl;
 
 import cuteowl.command.Command;
 import cuteowl.exception.CuteOwlException;
+import cuteowl.note.NoteList;
 import cuteowl.parser.Parser;
 import cuteowl.storage.Storage;
 import cuteowl.task.TaskList;
@@ -16,6 +17,7 @@ public class CuteOwl {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
+    private NoteList notes;
 
     /**
      * Constructs a CuteOwl instance with the specified file path for persistent storage.
@@ -33,6 +35,7 @@ public class CuteOwl {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+        notes = new NoteList();
     }
 
     /**
@@ -49,7 +52,7 @@ public class CuteOwl {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage, notes);
                 isExit = c.isExit();
             } catch (CuteOwlException e) {
                 ui.showError(e.getMessage());
@@ -72,7 +75,7 @@ public class CuteOwl {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, ui, storage, notes);
         } catch (CuteOwlException e) {
             return ui.showError(e.getMessage()); // You might need to add this method
         }

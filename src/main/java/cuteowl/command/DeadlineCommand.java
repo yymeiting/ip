@@ -1,10 +1,10 @@
 package cuteowl.command;
 
+import cuteowl.note.NoteList;
 import cuteowl.storage.Storage;
 import cuteowl.task.Deadline;
 import cuteowl.task.Task;
 import cuteowl.task.TaskList;
-import cuteowl.task.Todo;
 import cuteowl.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -19,10 +19,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, NoteList notes) {
         Task task = new Deadline(description, by);
         tasks.add(task);
-        storage.save(tasks);
+        storage.save(tasks, notes);
         ui.showTaskAdded(task, tasks.size());
         return ui.showTaskAddedGUI(task, tasks.size());
     }

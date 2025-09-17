@@ -164,6 +164,17 @@ public class Parser {
                 }
                 return new FindCommand(commandDescription);
 
+            case "note":
+                if (commandDescription.isEmpty()) {
+                    System.out.println(TAB + "OOPS!!! Please enter the what you wish to note.");
+                    throw new CuteOwlException("OOPS!!! Please enter the what you wish to note.");
+                }
+                return new AddNoteCommand(commandDescription);
+
+            case "notes":
+                return new ListNotesCommand();
+
+
             default:
                 System.out.println(TAB + "OOPS!!! I'm sorry, but I don't know what that means :-(");
                 throw new CuteOwlException("OOPS!!! I'm sorry, but I don't know what that means :-(");
