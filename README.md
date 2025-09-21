@@ -1,26 +1,39 @@
-# Duke project template
+# CuteOwl Chatbot - User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Welcome to CuteOwl, your friendly task assistant and conversational companion!
+This guide will help you get started and make the most of CuteOwl’s features.
 
-## Setting up in Intellij
+## Getting Started
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+- Launch the App
+  Open the CuteOwl application. You’ll see a chat interface with a scrollable history pane and an input field at the bottom.
+- Type Your Task
+  Enter your task or question in the input field labeled “Type your task here” and press Send or hit Enter.
+- View Responses
+  CuteOwl will respond immediately in the chat window. All messages are timestamped and displayed in order.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Key Features
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+1. Task Management
+- Add Tasks: Type a new task (e.g., “Read a book”) and CuteOwl will add it to your task list.
+- Mark/Unmark Tasks: Use commands like mark 2 or unmark 1 to update task status.
+- Delete Tasks: Remove tasks with commands like delete 3.
+2. Notes Support
+- CuteOwl can store and retrieve short notes. Use commands like note add Buy milk or note list to manage them.
+3. Persistent Storage
+- All tasks and notes are saved automatically. Your data is preserved between sessions.
+4. Friendly Feedback
+- CuteOwl responds with encouraging and clear messages to guide your workflow.
+- GUI messages are styled for readability and warmth.
+
+💬 Example Commands
+todo Finish homework
+mark 1
+unmark 1
+delete 1
+note add Remember to call mom
+notes
+
+
+
+
