@@ -7,9 +7,12 @@ import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 public class Main extends Application {
     private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
@@ -81,6 +84,7 @@ public class Main extends Application {
     private VBox createMainLayout(ScrollPane scrollPane, HBox inputContainer) {
         VBox layout = new VBox(10, scrollPane, inputContainer);
         layout.setPadding(new Insets(10));
+        layout.setStyle("-fx-background-color: #d2b48c;"); // Light brown (tan)
         return layout;
     }
 
@@ -112,18 +116,46 @@ public class Main extends Application {
     }
 
     private void displayUserMessage(String input, VBox dialogContainer) {
-        Label userLabel = new Label("You: " + input);
-        dialogContainer.getChildren().add(userLabel);
+        Label userLabel = new Label(input);
+        userLabel.setWrapText(true);
+        userLabel.setStyle(
+                "-fx-background-color: #add8e6;" + // Light blue
+                        "-fx-padding: 10;" +
+                        "-fx-border-radius: 5;" +
+                        "-fx-background-radius: 5;" +
+                        "-fx-max-width: 300px;"
+        );
+
+        HBox userBox = new HBox(userLabel);
+        userBox.setAlignment(Pos.TOP_RIGHT); // Align to the right
+        userBox.setPadding(new Insets(0, 30, 0, 0)); // Right-side padding
+        userBox.setMaxWidth(Double.MAX_VALUE);
+
+        dialogContainer.getChildren().add(userBox);
     }
 
     private void displayBotResponse(String input, VBox dialogContainer) {
         String response = getResponse(input);
-        Label botLabel = new Label("CuteOwl: " + response);
-        dialogContainer.getChildren().add(botLabel);
-    }
+        Label botLabel = new Label(response);
+        botLabel.setWrapText(true);
+        botLabel.setStyle(
+                "-fx-background-color: #f5f5dc;" + // Beige background
+                        "-fx-padding: 10;" +
+                        "-fx-border-radius: 5;" +
+                        "-fx-background-radius: 5;" +
+                        "-fx-max-width: 300px;"
+        );
 
-    private void clearInput(TextField userInput) {
-        userInput.clear();
+        // Load the image
+        Image owlImage = new Image("file:images/owl.png", 40, 40, true, true); // Adjust path and size
+        ImageView imageView = new ImageView(owlImage);
+
+        // Combine image and label
+        HBox botBox = new HBox(10, imageView, botLabel);
+        botBox.setAlignment(Pos.TOP_LEFT);
+        botBox.setMaxWidth(Double.MAX_VALUE);
+
+        dialogContainer.getChildren().add(botBox);
     }
 
 
