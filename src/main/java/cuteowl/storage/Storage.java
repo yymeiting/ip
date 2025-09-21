@@ -18,7 +18,12 @@ import java.util.ArrayList;
  * The file is located at "data/cuteOwl.txt"
  */
 public class Storage {
-    Path filePath = Paths.get("data", "cuteOwl.txt");
+    private static final String TASK_HEADER = "-----TASKS-----\n";
+    private static final String NOTE_HEADER = "-----NOTES-----\n";
+
+    private final Path filePath = Paths.get("data", "cuteOwl.txt");
+
+
 
     /**
      * Loads tasks from the save file. If the file does not exist, it is created.
@@ -28,11 +33,9 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-
         try {
             // if file does not exist, create file
             if (!Files.exists(filePath)) {
-                Files.createDirectories(filePath.getParent());
                 Files.createFile(filePath);
                 return tasks;
             }
@@ -51,13 +54,13 @@ public class Storage {
     public void save(TaskList taskList, NoteList noteList) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()));
-            writer.write("-----TASKS-----\n");
+            writer.write(TASK_HEADER);
             for (Task task : taskList.getAll()) {
                 writer.write(task.toSaveFormat());
                 writer.newLine();
             }
 
-            writer.write("\n-----NOTES-----\n");
+            writer.write(NOTE_HEADER);
             for (Note note : noteList.getAll()) {
                 writer.write(note.toSaveFormat());
                 writer.newLine();

@@ -13,10 +13,10 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Indentation used for chatbot messages for formatting */
-    String CHAT_INDENTATION = "     ";
+    private static final String CHAT_INDENTATION = "     ";
 
     /** Horizontal line used to visually separate chatbot output */
-    String DRAW_LINE = "    _______________________________________________________________________";
+    private static final String DRAW_LINE = "    _______________________________________________________________________";
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -98,7 +98,7 @@ public class Ui {
 
     public String showTaskListGUI(TaskList tasks) {
         String listTasks = "Here are the tasks in your list:\n";
-        for (int  i = 0; i < tasks.size() ; i+=1 ) {
+        for (int  i = 0; i < tasks.size() ; i++ ) {
             listTasks = listTasks + " " + (i + 1) + ". " + tasks.get(i) + "\n";
         }
         return listTasks;
@@ -128,7 +128,7 @@ public class Ui {
             listNotes = "Sadly there are no notes now!!\n";
         } else {
             listNotes = "Here are your notes~ \n";
-            for (int i = 0; i < notes.size(); i += 1) {
+            for (int i = 0; i < notes.size(); i++ ) {
                 listNotes = listNotes + "-- " + notes.get(i) + "\n";
             }
         }
@@ -173,13 +173,13 @@ public class Ui {
      *
      * @param task The task that was marked.
      */
-    public void showMarkText(Task task) {
-        String markText = CHAT_INDENTATION + "Nice! I've marked this task as done:\n" +
+    public void showTaskMarked(Task task) {
+        String taskMarked = CHAT_INDENTATION + "Nice! I've marked this task as done:\n" +
                 CHAT_INDENTATION + task;
-        System.out.println(markText);
+        System.out.println(taskMarked);
     }
 
-    public String showMarkTextGUI(Task task) {
+    public String showTaskMarkedGUI(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -188,13 +188,13 @@ public class Ui {
      *
      * @param task The task that was unmarked.
      */
-    public void showUnmarkText(Task task) {
+    public void showTaskUnmarked(Task task) {
         String unmarkText = CHAT_INDENTATION + "OK, I've marked this task as not done yet:\n" +
                 CHAT_INDENTATION + task;
         System.out.println(unmarkText);
     }
 
-    public String showUnmarkTextGUI(Task task) {
+    public String showTaskUnmarkGUI(Task task) {
         return "OK, I've marked this task as not done yet:\n" + task;
     }
 

@@ -14,27 +14,21 @@ import cuteowl.ui.Ui;
  */
 
 public class CuteOwl {
-    private Ui ui;
-    private TaskList tasks;
-    private Storage storage;
-    private NoteList notes;
+    private final Ui ui;
+    private final TaskList tasks;
+    private final Storage storage;
+    private final NoteList notes;
 
     /**
      * Constructs a CuteOwl instance with the specified file path for persistent storage.
-     * Initializes UI, storage and loads tasks from file.
-     * If loading fails, ui will show loading error and starts with an empty task list.
+     * Initializes UI, storage and tasks from file.
      *
      * @param filePath Path to the file used for loading and saving tasks.
      */
     public CuteOwl(String filePath) {
         ui = new Ui();
         storage = new Storage();
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (Exception e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        tasks = new TaskList();
         notes = new NoteList();
     }
 

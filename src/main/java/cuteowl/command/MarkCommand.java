@@ -24,8 +24,8 @@ public class MarkCommand extends Command {
         task.mark();
         assert task.getIsDone() : "Task should be marked done after calling mark()";
         storage.save(tasks, notes);
-        ui.showMarkText(task);
-        return ui.showMarkTextGUI(task);
+        ui.showTaskMarked(task);
+        return ui.showTaskMarkedGUI(task);
     }
 
 }

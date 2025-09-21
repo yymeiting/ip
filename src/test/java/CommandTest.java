@@ -50,9 +50,8 @@ public class CommandTest {
 
     @Test
     public void execute_unmark_unmarksTask() throws Exception {
-        Task task = new Todo("Finish homework");
-        task.mark();
-        tasks.add(task);
+        tasks.add(new Todo("Finish homework"));
+        tasks.get(0).mark();
 
         UnmarkCommand cmd = new UnmarkCommand(1);
         cmd.execute(tasks, ui, storage, notes);

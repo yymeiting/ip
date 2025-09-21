@@ -23,5 +23,6 @@ public class TodoCommand extends Command {
         storage.save(tasks, notes);
         ui.showTaskAdded(task, tasks.size());
         return ui.showTaskAddedGUI(task, tasks.size());
+
     }
 }
