@@ -27,11 +27,17 @@ This guide will help you get started and make the most of CuteOwl’s features.
 - GUI messages are styled for readability and warmth.
 
 💬 Example Commands
+
 todo Finish homework
+
 mark 1
+
 unmark 1
+
 delete 1
+
 note add Remember to call mom
+
 notes
 
 
